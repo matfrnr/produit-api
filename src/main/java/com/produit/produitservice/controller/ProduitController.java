@@ -2,8 +2,11 @@ package com.produit.produitservice.controller;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,11 +22,6 @@ import lombok.RequiredArgsConstructor;
 public class ProduitController {
     private final ProduitService produitService;
 
-    @GetMapping("/hello")
-    public String sayHello() {
-        return "Hello";
-    }
-
     @GetMapping("/all")
     public List<Produit> getAllProduits() {
         return produitService.getAllProduits();
@@ -34,4 +32,20 @@ public class ProduitController {
         return produitService.createProduit(produit);
     }
 
+    @GetMapping("{id}")
+    public Produit getProduitById(@PathVariable long id) {
+        return produitService.getProduitById(id);
+    }
+
+    @DeleteMapping("{id}")
+    public String deleteProduitById(@PathVariable long id) {
+        return produitService.deleteProduitById(id);
+    }
+
+    @PutMapping("{id}")
+    public Produit editProduit(@PathVariable long id, @RequestBody Produit produit) {
+        return produitService.editProduit(id, produit);
+    }
+
 }
+ 
