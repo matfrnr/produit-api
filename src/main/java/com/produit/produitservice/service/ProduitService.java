@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.produit.produitservice.exceptions.ProduitNotFoundException;
 import com.produit.produitservice.model.Produit;
 import com.produit.produitservice.repository.ProduitRepository;
 
@@ -27,7 +28,7 @@ public class ProduitService {
         Optional<Produit> optionalProduit = produitRepository.findById(id);
 
         if (optionalProduit.isEmpty()) {
-            throw new RuntimeException("Le produit n'existe pas");
+            throw new ProduitNotFoundException("Le produit n'existe pas");
         }
         return optionalProduit.get();
     }
